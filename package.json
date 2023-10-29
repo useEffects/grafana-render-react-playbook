@@ -10,9 +10,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@grafana/data": "^10.2.0",
+    "@grafana/runtime": "^10.2.0",
     "debounce": "^1.2.1",
     "dotenv": "^16.3.1",
-    "react": "^18.2.0"
+    "react": "^18.2.0",
+    "twind": "^0.16.19"
   },
   "devDependencies": {
     "@types/debounce": "^1.2.3",

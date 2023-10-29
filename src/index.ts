@@ -3,7 +3,7 @@ import { exit } from "process";
 import debounce from "debounce";
 import "dotenv/config"
 
-const { API_KEY, ORG_ID, DASHBOARD_UID, PANEL_ID, HOSTNAME, FOLDER_UID } = process.env
+const { API_KEY, ORG_ID, DASHBOARD_UID, PANEL_ID, HOSTNAME, FOLDER_UID, PROTOCOL } = process.env
 
 const filePath = __dirname + "/source.tsx";
 
@@ -21,7 +21,7 @@ function getFileContents() {
 
 async function postChanges() {
     const sourceCode = getFileContents()
-    const response = await fetch(`http://${HOSTNAME}/api/dashboards/uid/${DASHBOARD_UID}`, {
+    const response = await fetch(`https://${HOSTNAME}/api/dashboards/uid/${DASHBOARD_UID}`, {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${API_KEY}`
@@ -46,7 +46,7 @@ async function postChanges() {
         overwrite: true,
         folderUid: FOLDER_UID
     }
-    const postResponse = await fetch(`http://${HOSTNAME}/api/dashboards/db`, {
+    const postResponse = await fetch(`${PROTOCOL}://${HOSTNAME}/api/dashboards/db`, {
         method: "POST",
         headers: {
             "Authorization": `Bearer ${API_KEY}`,
@@ -61,6 +61,7 @@ async function postChanges() {
 
 const debouncedPostChanges = debounce(postChanges, 500);
 
+postChanges()
 watch(filePath, (eventName) => {
     if (eventName === "change") {
         debouncedPostChanges();
