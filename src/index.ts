@@ -21,7 +21,7 @@ function getFileContents() {
 
 async function postChanges() {
     const sourceCode = getFileContents()
-    const response = await fetch(`https://${HOSTNAME}/api/dashboards/uid/${DASHBOARD_UID}`, {
+    const response = await fetch(`${PROTOCOL}://${HOSTNAME}/api/dashboards/uid/${DASHBOARD_UID}`, {
         method: "GET",
         headers: {
             "Authorization": `Bearer ${API_KEY}`
